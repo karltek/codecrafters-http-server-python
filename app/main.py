@@ -21,7 +21,7 @@ def main():
         if result[0].split(" ")[1] == "/":
             connection.sendall(res_200)
         else:
-            connection.sendall(res_200)
+            connection.sendall(res_400)
         
         connection.close()
 
