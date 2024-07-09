@@ -16,6 +16,7 @@ pyparsing = "~=3.0"
 lark = "~=1.1"
 
 [dev-packages]
+ipykernel = "*"
 
 [requires]
 python_version = "3"
