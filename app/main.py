@@ -14,6 +14,7 @@ def main():
         res_200 = b"HTTP/1.1 200 OK\r\n\r\n"
         res_400 = b"HTTP/1.1 404 Not Found\r\n\r\n"
         res = result[0].split(" ")
+        
         if res[1] == "/":
             connection.sendall(res_200)
         elif res[1].split("/")[1] == "echo":
@@ -23,7 +24,15 @@ def main():
                     f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(content)}\r\n\r\n{content}".encode()
                 )
             except:
-                connection.sendall(res_400)    
+                connection.sendall(res_400)
+        elif res[1].split("/")[1] == "user-agent":
+            try:
+                content = [x for x in result if "User-Agent" in x][0].split(": ")[1]
+                connection.sendall(
+                    f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(content)}\r\n\r\n{content}".encode()
+                )
+            except:
+                 connection.sendall(res_400)
         else:
             connection.sendall(res_400)
         connection.close()
